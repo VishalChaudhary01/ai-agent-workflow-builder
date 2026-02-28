@@ -1,0 +1,54 @@
+import { StatusCode } from "@/config/httpStatus";
+import { Workflow } from "@/models/Workflow";
+import { AppError } from "@/utils/appError";
+import { CreateWorkflowType } from "@/validator/workflow.validator";
+import { RequestHandler } from "express";
+
+export const createWorkflow: RequestHandler = async (req, res) => {
+  const data: CreateWorkflowType = req.body;
+  const userId = req.userId;
+
+  const exitingWorkflow = await Workflow.findOne({ name: data.name, userId });
+  if (exitingWorkflow) {
+    throw new AppError("Workflow with given name already exist");
+  }
+
+  await Workflow.create({
+    ...data,
+    userId,
+  });
+
+  res
+    .status(StatusCode.CREATED)
+    .json({ message: "Create workflow successful" });
+};
+
+export const getWorkflows: RequestHandler = async (req, res) => {
+  const userId = req.userId;
+  if (!userId) {
+    throw new AppError("Unauthorized user", StatusCode.UNAUTHORIZED);
+  }
+
+  const workflows = await Workflow.find({ userId });
+
+  res
+    .status(StatusCode.OK)
+    .json({ message: "Fetch all workflow successful", workflows });
+};
+
+export const getWorkflowById: RequestHandler = async (req, res) => {
+  const workflowId = req.params.id;
+  const userId = req.userId;
+  if (!userId) {
+    throw new AppError("Unauthorized user", StatusCode.UNAUTHORIZED);
+  }
+
+  const workflow = await Workflow.findById(workflowId);
+  if (!workflow || workflow.userId.toString() !== userId) {
+    throw new AppError("Workflow not found", StatusCode.NOT_FOUND);
+  }
+
+  res.status(StatusCode.OK).json({
+    message: "Fetch workflow successful",
+  });
+};
