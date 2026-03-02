@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import { Env } from "./config/env";
 import { errorHandler } from "./middlewares/errorHandler";
 import { StatusCode } from "./config/httpStatus";
@@ -8,6 +9,7 @@ import { connectDB } from "./config/db";
 import appRoutes from "./routes";
 
 const app = express();
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
