@@ -4,6 +4,7 @@ import SigninPage from "./pages/Signin";
 import DashboardPage from "./pages/Dashboard";
 import AuthLayout from "./layouts/auth.layout";
 import AppLayout from "./layouts/app.layout";
+import WorkflowBuilder from "./pages/WorkflowBuilder";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
 
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/workflow/:id" element={<WorkflowBuilder />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -29,12 +29,25 @@ export const createWorkflowMutationFn = async (
   return res.data;
 };
 
+export const udpateWorkflowMutationFn = async ({
+  id,
+  nodes,
+  edges,
+}: {
+  id: string;
+  nodes: any;
+  edges: any;
+}): Promise<any> => {
+  const res = await API.put(`/workflow/${id}`, { nodes, edges });
+  return res.data;
+};
+
 export const getAllWorkflowsQueryFn = async (): Promise<any> => {
   const res = await API.get("/workflow");
   return res.data;
 };
 
 export const getWorkflowByIdQueryFn = async (id: string): Promise<any> => {
-  const res = await API.get(`/workflow/:${id}`);
+  const res = await API.get(`/workflow/${id}`);
   return res.data;
 };

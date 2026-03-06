@@ -8,9 +8,9 @@ export const createWorkflowSchema = z.object({
 
   description: z.string().max(500, "Description too long").optional(),
 
-  config: z.string().default("{}"),
+  config: z.string().default("{}").optional(),
 
-  published: z.boolean().default(false),
+  published: z.boolean().default(false).optional(),
 });
 
 export type CreateWorkflowType = z.infer<typeof createWorkflowSchema>;
