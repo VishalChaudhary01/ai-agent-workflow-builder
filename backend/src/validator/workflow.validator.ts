@@ -13,4 +13,8 @@ export const createWorkflowSchema = z.object({
   published: z.boolean().default(false),
 });
 
+// export const updateWorkflowSchema = z.object({
+//   node:
+// })
+
 export type CreateWorkflowType = z.infer<typeof createWorkflowSchema>;

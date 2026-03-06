@@ -19,6 +19,14 @@ const workflowSchema = new Schema(
       type: String,
       default: "{}",
     },
+    nodes: {
+      type: Array,
+      default: [],
+    },
+    edges: {
+      type: Array,
+      default: [],
+    },
     published: {
       type: Boolean,
       default: false,

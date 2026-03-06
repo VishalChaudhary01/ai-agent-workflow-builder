@@ -13,14 +13,32 @@ export const createWorkflow: RequestHandler = async (req, res) => {
     throw new AppError("Workflow with given name already exist");
   }
 
-  await Workflow.create({
+  const newWorkflow = await Workflow.create({
     ...data,
     userId,
   });
 
   res
     .status(StatusCode.CREATED)
-    .json({ message: "Create workflow successful" });
+    .json({ message: "Create workflow successful", id: newWorkflow._id });
+};
+
+export const updateWorkflow: RequestHandler = async (req, res) => {
+  const userId = req.userId;
+  const workflowId = req.params.id;
+  const workflow = await Workflow.findById(workflowId);
+  if (!workflow || workflow.userId.toString() !== userId) {
+    throw new AppError("Workflow not found", StatusCode.NOT_FOUND);
+  }
+
+  const updatedWorkflow = await Workflow.findByIdAndUpdate(
+    workflowId,
+    req.body,
+  );
+
+  res
+    .status(StatusCode.OK)
+    .json({ message: "Workflow updated", updatedWorkflow });
 };
 
 export const getWorkflows: RequestHandler = async (req, res) => {
@@ -50,5 +68,6 @@ export const getWorkflowById: RequestHandler = async (req, res) => {
 
   res.status(StatusCode.OK).json({
     message: "Fetch workflow successful",
+    workflow,
   });
 };
