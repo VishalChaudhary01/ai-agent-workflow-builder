@@ -1,6 +1,7 @@
 import API from "./axios-client";
 import type { SignInInput, SignUpInput } from "@/validators/user";
 import type { CreateWorkflowType } from "@/validators/workflow";
+import type { Edge, Node } from "@xyflow/react";
 
 export const signupMutationFn = async (input: SignUpInput): Promise<any> => {
   const res = await API.post("/user/signup", input);
@@ -35,8 +36,8 @@ export const udpateWorkflowMutationFn = async ({
   edges,
 }: {
   id: string;
-  nodes: any;
-  edges: any;
+  nodes?: Node[];
+  edges?: Edge[];
 }): Promise<any> => {
   const res = await API.put(`/workflow/${id}`, { nodes, edges });
   return res.data;

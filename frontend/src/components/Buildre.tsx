@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useContext, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   ReactFlow,
   applyNodeChanges,
@@ -14,6 +14,8 @@ import {
   type OnEdgesChange,
   type OnConnect,
   BackgroundVariant,
+  useOnSelectionChange,
+  type OnSelectionChangeParams,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import StartNode from "./customNodes/StartNote";
@@ -23,7 +25,7 @@ import WhileNode from "./customNodes/WhileNode";
 import APINode from "./customNodes/APINode";
 import EndNode from "./customNodes/EndNode";
 import AgentToolPanel from "./AgentToolPanel";
-import { WorkflowContext } from "@/context/workflowContext";
+import { useWorkflowContext } from "@/context/workflowContext";
 import { useMutation } from "@tanstack/react-query";
 import { udpateWorkflowMutationFn } from "@/lib/api-functions";
 import { useParams } from "react-router-dom";
@@ -47,8 +49,8 @@ const nodeTypes = {
 export default function Builder() {
   const { id = "" } = useParams();
 
-  const { addedNodes, setAddedNodes, setNodeEdges } =
-    useContext(WorkflowContext);
+  const { addedNodes, setAddedNodes, setNodeEdges, setSelectedNode } =
+    useWorkflowContext();
 
   const { data: result, isPending, isError } = useWorkflowQuery(id);
 
@@ -123,6 +125,17 @@ export default function Builder() {
       }),
     [setNodeEdges],
   );
+
+  const onNodeSelect = useCallback(
+    ({ nodes }: OnSelectionChangeParams) => {
+      setSelectedNode(nodes[0]);
+    },
+    [nodes],
+  );
+
+  useOnSelectionChange({
+    onChange: onNodeSelect,
+  });
 
   if (isPending) {
     return (

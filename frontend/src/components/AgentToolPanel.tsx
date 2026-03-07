@@ -1,4 +1,4 @@
-import { WorkflowContext } from "@/context/workflowContext";
+import { useWorkflowContext } from "@/context/workflowContext";
 import {
   Bot,
   CircleOff,
@@ -9,7 +9,6 @@ import {
   Webhook,
   type LucideIcon,
 } from "lucide-react";
-import { useContext } from "react";
 
 export interface ToolType {
   id: string;
@@ -72,7 +71,7 @@ const tools = [
 ];
 
 export default function AgentToolPanel() {
-  const { setAddedNodes } = useContext(WorkflowContext);
+  const { setAddedNodes } = useWorkflowContext();
 
   const handleToolClick = (tool: ToolType) => {
     const newNode = {

@@ -2,14 +2,14 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import Provider from "./provider.tsx";
 import { Toaster } from "sonner";
+import RootProvider from "./providers/rootProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider>
+    <RootProvider>
       <Toaster richColors />
       <App />
-    </Provider>
+    </RootProvider>
   </StrictMode>,
 );
