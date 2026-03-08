@@ -1,17 +1,21 @@
 import { ChevronLeft, Code, Loader, Play } from "lucide-react";
 import { Button } from "./ui/button";
 import { useWorkflowQuery } from "@/lib/queries";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function WorkflowBuilderHeader() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { data: res, isPending } = useWorkflowQuery(id ?? "");
 
   return (
     <div className="sticky top-0 z-50 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <div className="flex gap-3">
-          <ChevronLeft className="w-8 h-8" />
+          <ChevronLeft
+            onClick={() => navigate("/")}
+            className="w-8 h-8 cursor-pointer"
+          />
 
           <h2 className="text-lg sm:text-xl font-bold tracking-tight truncate">
             {isPending ? (
@@ -33,7 +37,7 @@ export default function WorkflowBuilderHeader() {
             Code
           </Button>
 
-          <Button size="sm">
+          <Button size="sm" onClick={() => navigate("preview")}>
             <Play className="w-4 h-4" />
             Preview
           </Button>

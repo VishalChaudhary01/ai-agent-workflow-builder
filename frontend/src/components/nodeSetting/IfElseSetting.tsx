@@ -15,7 +15,7 @@ export default function IfElseSetting() {
   const form = useForm<IfElseData>({
     resolver: zodResolver(ifElseSchema),
     defaultValues: {
-      ifCondition: "",
+      ifCondition: (selectedNode?.data?.ifCondition as string) ?? "",
     },
   });
 

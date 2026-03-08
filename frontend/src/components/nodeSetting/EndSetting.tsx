@@ -15,7 +15,7 @@ export default function EndSetting() {
   const form = useForm<EndData>({
     resolver: zodResolver(endSchema),
     defaultValues: {
-      outputFormat: "",
+      outputFormat: (selectedNode?.data?.outputFormat as string) ?? "",
     },
   });
 

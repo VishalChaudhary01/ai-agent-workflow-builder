@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { includes, z } from "zod";
 
 export const agentSchema = z.object({
   name: z
@@ -48,8 +48,43 @@ export const whileSchema = z.object({
     .min(1, "Condition is required")
     .max(155, "Condition must be under 155 characters"),
 });
+
+export const apiSchema = z
+  .object({
+    name: z
+      .string()
+      .min(1, "Name is required")
+      .max(64, "Name must be under 64 characters"),
+
+    method: z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"], {
+      errorMap: () => ({ message: "Method is required" }),
+    }),
+
+    url: z
+      .string()
+      .trim()
+      .min(1, "URL is required")
+      .max(155, "URL must be under 155 characters"),
+
+    includesApiKey: z.boolean(),
+
+    apiKey: z.string().trim(),
+
+    bodyParams: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.includesApiKey && !data.apiKey) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "API key is required",
+        path: ["apiKey"],
+      });
+    }
+  });
+
 export type AgentFormData = z.infer<typeof agentSchema>;
 export type UserApprovalData = z.infer<typeof userApprovalSchema>;
 export type EndData = z.infer<typeof endSchema>;
 export type IfElseData = z.infer<typeof ifElseSchema>;
 export type WhileData = z.infer<typeof whileSchema>;
+export type APIData = z.infer<typeof apiSchema>;

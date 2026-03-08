@@ -15,7 +15,7 @@ export default function IfElseSetting() {
   const form = useForm<WhileData>({
     resolver: zodResolver(whileSchema),
     defaultValues: {
-      condition: "",
+      condition: (selectedNode?.data?.condition as string) ?? "",
     },
   });
 

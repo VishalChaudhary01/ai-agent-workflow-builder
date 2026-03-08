@@ -5,6 +5,7 @@ import DashboardPage from "./pages/Dashboard";
 import AuthLayout from "./layouts/auth.layout";
 import AppLayout from "./layouts/app.layout";
 import WorkflowBuilder from "./pages/WorkflowBuilder";
+import Preview from "./pages/Preview";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/workflow/:id" element={<WorkflowBuilder />} />
+          <Route path="//workflow/:id/preview" element={<Preview />} />
         </Route>
       </Routes>
     </BrowserRouter>

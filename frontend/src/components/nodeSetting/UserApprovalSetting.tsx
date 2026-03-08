@@ -19,8 +19,8 @@ export default function UserApprovalSetting() {
   const form = useForm<UserApprovalData>({
     resolver: zodResolver(userApprovalSchema),
     defaultValues: {
-      title: "",
-      message: "",
+      title: (selectedNode?.data?.title as string) ?? "",
+      message: (selectedNode?.data?.message as string) ?? "",
     },
   });
 
