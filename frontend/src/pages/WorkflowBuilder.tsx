@@ -1,10 +1,10 @@
 import Builder from "@/components/Buildre";
-import WorkflowBuilderHeader from "@/components/WorkflowBuilderHeader";
+import Header from "@/components/Header";
 
 export default function WorkflowBuilder() {
   return (
     <div className="w-full">
-      <WorkflowBuilderHeader />
+      <Header />
       <div>
         <Builder />
       </div>

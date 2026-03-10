@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAllWorkflowsQuery } from "@/lib/queries";
-import { LoaderCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -36,8 +36,9 @@ export default function DashboardPage() {
 
         <div className="mt-12">
           {isPending ? (
-            <div className="flex justify-center items-center py-24">
-              <LoaderCircle className="w-12 h-12 animate-spin text-primary" />
+            <div className="flex items-center justify-center w-screen h-[88vh] gap-2 text-muted-foreground">
+              <Loader2 className="animate-spin w-5 h-5" />
+              <span>Loading workflows…</span>
             </div>
           ) : res?.workflows?.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -57,7 +58,7 @@ export default function DashboardPage() {
                         lg:grid-cols-3 
                         xl:grid-cols-4"
             >
-              {res?.workflows.map((wf) => (
+              {res?.workflows.map((wf: any) => (
                 <Card
                   key={wf._id}
                   onClick={() => navigate(`/workflow/${wf._id}`)}

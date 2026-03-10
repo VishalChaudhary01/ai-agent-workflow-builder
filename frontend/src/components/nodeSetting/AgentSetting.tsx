@@ -37,21 +37,21 @@ const MODELS = [
       { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
     ],
   },
-  {
-    group: "OpenAI",
-    items: [
-      { value: "gpt-4o", label: "GPT-4o" },
-      { value: "gpt-4o-mini", label: "GPT-4o Mini" },
-      { value: "gpt-3.5-turbo", label: "GPT-3.5 Turbo" },
-    ],
-  },
-  {
-    group: "Anthropic",
-    items: [
-      { value: "claude-sonnet-4", label: "Claude Sonnet 4" },
-      { value: "claude-haiku-3.5", label: "Claude Haiku 3.5" },
-    ],
-  },
+  // {
+  //   group: "OpenAI",
+  //   items: [
+  //     { value: "gpt-4o", label: "GPT-4o" },
+  //     { value: "gpt-4o-mini", label: "GPT-4o Mini" },
+  //     { value: "gpt-3.5-turbo", label: "GPT-3.5 Turbo" },
+  //   ],
+  // },
+  // {
+  //   group: "Anthropic",
+  //   items: [
+  //     { value: "claude-sonnet-4", label: "Claude Sonnet 4" },
+  //     { value: "claude-haiku-3.5", label: "Claude Haiku 3.5" },
+  //   ],
+  // },
 ];
 
 const DEFAULT_JSON_SCHEMA = `{

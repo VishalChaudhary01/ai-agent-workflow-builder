@@ -52,3 +52,20 @@ export const getWorkflowByIdQueryFn = async (id: string): Promise<any> => {
   const res = await API.get(`/workflow/${id}`);
   return res.data;
 };
+
+export const runWorkflowMutationFn = async ({
+  workflowId,
+  userMessage,
+  config,
+}: {
+  workflowId: string;
+  userMessage: string;
+  config: any;
+}): Promise<{ output: string; executionLog: any[] }> => {
+  const res = await API.post(`/workflow/${workflowId}/run`, {
+    userMessage,
+    config,
+  });
+
+  return res.data;
+};

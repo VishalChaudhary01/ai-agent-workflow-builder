@@ -36,7 +36,7 @@ import { toast } from "sonner";
 import UserApprovalNode from "./customNodes/UserApprovalNode";
 import SettingPanel from "./SettingPanel";
 
-const nodeTypes = {
+export const nodeTypes = {
   startNode: StartNode,
   agentNode: AgentNode,
   ifElseNode: IfElseNode,
