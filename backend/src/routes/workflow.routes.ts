@@ -2,6 +2,7 @@ import {
   createWorkflow,
   getWorkflowById,
   getWorkflows,
+  runWorkflow,
   updateWorkflow,
 } from "@/controller/workflow.controller";
 import { validateInput } from "@/middlewares/inputValidator";
@@ -14,5 +15,6 @@ workflowRoutes.post("/", validateInput(createWorkflowSchema), createWorkflow);
 workflowRoutes.put("/:id", updateWorkflow);
 workflowRoutes.get("/:id", getWorkflowById);
 workflowRoutes.get("/", getWorkflows);
+workflowRoutes.post("/:id/run", runWorkflow);
 
 export default workflowRoutes;
