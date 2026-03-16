@@ -9,7 +9,7 @@
 
 ---
 
-FlowAI is an n8n-inspired AI workflow builder where users visually compose chains of nodes — LLM agents, HTTP APIs, conditional branches, loops, and human approval gates — into executable pipelines. Each workflow is saved to the database and can be tested live via an integrated chat preview interface.
+It is an n8n-inspired AI workflow builder where users visually compose chains of nodes — LLM agents, HTTP APIs, conditional branches, loops, and human approval gates — into executable pipelines. Each workflow is saved to the database and can be tested live via an integrated chat preview interface.
 Think of it as a programmable AI middleware layer: instead of hardcoding prompt chains, users wire them visually and the backend execution engine runs them dynamically.
 
 ---
